@@ -1,0 +1,61 @@
+---
+layout: post
+title:  "ORM Essay!"
+date:   2015-06-24 02:32:16
+categories: orm essay markdown
+---
+
+## ORM
+
+ORM is a way to design and pattern your code in order to interact with databases. The columns for each row are stored as attributes in ruby objects.
+
+
+## .all
+
+```ruby
+  def all
+    table_name = self.to_s.pluralize.underscore
+    
+    results = CONNECTION.execute("SELECT * FROM '#{table_name}';")
+
+    results_as_objects = []
+    
+    results.each do |result_hash|
+      results_as_objects << self.new(result_hash)
+    end
+    
+    return results_as_objects
+  end
+```
+
+To retrieve information for each row in a database I use the code above. 
+
+- table_name ~ Not really orm, just getting the name of the table from the class the method is being called upon.
+
+results
+
+- Calls .execute on our database connection (CONNECTION). Runs the SQL code SELECT (to pull information) * (all information) FROM table_name (the name of the table)
+- results ~ an array of hashes. Each hash is a row
+
+results_as_objects
+
+- First it's an empty array
+- Then we run .each on results. For each hash in the results array it will run .new with the arguements of it's columns (attributes)
+- Each object is then inserted into the results_as_objects array.
+
+
+## The Objects
+
+Each object that is made represents a row in a given table. The information provided in the columns are stored as attributes for each object. Each object is unique, just representing one given row.
+
+## Converting Rows to Objects
+
+```ruby
+  def initialize(options={})
+    @id = options["id"]
+    @name = options["name"]
+    @location_id = options["location_id"]
+  end
+```
+
+Rows are converted into objects with the above method. The rows in a table are returned to Ruby in hash form, with the name of the column represented by the key and the information for a column in a row represented by the value. When a new object is created you assign it's attributes their values by connecting it to the proper key in the hash. This is made easier by using similar naming conventions.
