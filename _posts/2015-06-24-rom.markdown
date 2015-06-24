@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "ORM Essay!"
+title:  "ORM Essay"
 date:   2015-06-24 02:32:16
 categories: orm essay markdown
 ---
