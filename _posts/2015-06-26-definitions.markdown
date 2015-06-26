@@ -45,7 +45,9 @@ puts a
 
 ## Request
 
-I believe a request is the code that interacts with a database. When you call 'SELECT * FROM table' in SQL the 'SELECT * FROM table' is the 'request' made to the database.
+A request is asking a server for information for something. 
+
+I.e. /home is a request for whatever '/home' does
 
 ## Route
 
